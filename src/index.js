@@ -12,6 +12,7 @@ import fs from 'fs';
 import { info, error } from './utils/logger.js';
 import path from 'path';
 import { getGlobals } from 'common-es';
+import { MongoClient } from 'mongodb';
 // Since this is a module, we can use import.meta.url to get the current directory
 const { __dirname } = getGlobals(import.meta.url);
 
@@ -24,11 +25,7 @@ const {
 info('Initializing...');
 // Client configuration goes here
 const client = new Client({ intents: [GatewayIntentBits.Guilds], partials: [Partials.Channel] });
-// Required directory structure:
-// src
-// 	commands
-// 	events
-// 	interactions
+const mongo = new MongoClient(process.env.MONGO_URI, { monitorCommands: true });
 const commandFiles = fs.readdirSync(`${path.join(__dirname)}/commands`).filter(file => file.endsWith('.js'));
 const eventFiles = fs.readdirSync(`${path.join(__dirname)}/events`).filter(file => file.endsWith('.js'));
 const interactionFiles = fs.readdirSync(`${path.join(__dirname)}/interactions`).filter(file => file.endsWith('.js'));
@@ -70,7 +67,7 @@ async function registerCommands() {
 
 /**
  * Deal with other interactions here
- * @param {Interaction<CacheType>} i
+ * @param {import("discord.js").Interaction<import("discord.js").CacheType>} i
  */
 async function otherInteractions(i) {
 	// Logic for other interactions
@@ -130,6 +127,19 @@ client.on(Events.InteractionCreate, async interaction => {
 		client.interactions.set(interaction.interactionId, interaction);
 	}
 	info('Registered interactions successfully!');
+
+	info('Connecting to MongoDB...');
+	try {
+		await mongo.connect();
+	}
+	catch (err) {
+		if (err) error(err);
+		return;
+	}
+	finally {
+		client.db = mongo.db(process.env.MONGO_DB_NAME);
+		info('Connected to MongoDB successfully!');
+	}
 
 	await registerCommands();
 	await client.login(token);
