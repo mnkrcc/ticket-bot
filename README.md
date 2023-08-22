@@ -1,6 +1,6 @@
-# discordjs-bot-template
+# ticket-bot
 
-A simple discord bot template using discord.js.
+The main ticket/support bot used in the Moniker discord server.
 
 ## Installation
 
