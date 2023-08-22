@@ -21,6 +21,7 @@
     "mongodb": "^5.7.0"
   },
   "devDependencies": {
-    "eslint": "^8.15.0"
+    "eslint": "^8.15.0",
+    "prettier": "3.0.2"
   }
 }
