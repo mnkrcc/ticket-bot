@@ -1,6 +1,6 @@
-# discordjs-bot-template
+# ticket-bot
 
-A simple discord bot template using discord.js.
+The main ticket/support bot used in the Moniker discord server.
 
 ## Installation
 
@@ -17,6 +17,10 @@ A simple discord bot template using discord.js.
 TOKEN=your-bot-token
 CLIENT_ID=your-bot-client-id
 GUILD_ID=your-guild-id # Optional but is required for easy testing of slash commands.
+MONGO_URI=mongo-connect-uri
+MONGO_DB_NAME=db-name
+TEAM_ROLE_ID=role-id
+TICKETS_CATEGORY_ID=tickets-category-id
 ```
 
 ## Usage
