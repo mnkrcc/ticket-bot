@@ -20,7 +20,7 @@ export async function execute(interaction) {
   const ticketTitleInput = new TextInputBuilder()
     .setCustomId("ticket-title-input")
     .setMaxLength(1024)
-    .setLabel("What's is your ticket about?")
+    .setLabel("What is your ticket about?")
     .setStyle(TextInputStyle.Short);
 
   const summaryInput = new TextInputBuilder()

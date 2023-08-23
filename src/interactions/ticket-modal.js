@@ -63,7 +63,7 @@ export async function execute(interaction) {
     .setDescription("Please wait until the team responds to your ticket.")
     .addFields(
       {
-        name: "What's is your ticket about?",
+        name: "What is your ticket about?",
         value: title,
         inline: false,
       },
