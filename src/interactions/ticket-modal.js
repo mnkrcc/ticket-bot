@@ -32,7 +32,7 @@ export async function execute(interaction) {
     permissionOverwrites: [
       {
         id: interaction.user.id,
-        deny: [
+        allow: [
           PermissionFlagsBits.ViewChannel,
           PermissionFlagsBits.SendMessages,
         ],
